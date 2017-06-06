@@ -1,0 +1,51 @@
+# Dockerfile
+# The FROM directive sets the Base Image for subsequent instructions
+FROM node:7
+
+# Create a new folder for our application
+RUN mkdir -p /usr/src/app
+
+# Set the working dir when our container executes
+WORKDIR /usr/src/app
+
+# Copy our package.json file
+ADD package.json /usr/src/app
+
+# Install our packages
+RUN npm install
+
+# Copy the rest of our application
+COPY . /usr/src/app
+
+#Expose our application port
+EXPOSE 4200
+
+# Set start command
+CMD ["node", "server.js"]
+
+# Creathe the image.
+# docker build -t api-shift-management-setup .
+
+# Run the image
+# docker run -p 4200:4200 api-shift-management-setup
+
+#Sharing Docker image
+# see https://buddy.works/guides/how-dockerize-node-application
+
+#Continuous deployment for Node.js on DigitalOcean
+#see https://hackernoon.com/continuous-deployment-for-node-js-on-digitalocean-d800e8520ffe
+
+#http://b.zsh.io/2013/12/que-es-dokku.html
+#http://blog.shippable.com/continuous-deployment-to-digital-ocean-for-nodejs-app
+#https://blog.codeship.com/continuous-integration-and-delivery-with-docker/
+#http://rancher.com/
+#https://kubernetes.io/
+#https://docs.docker.com/machine/examples/ocean/
+#http://mherman.org/blog/2015/03/06/node-with-docker-continuous-integration-and-delivery/#.WTYO9GjTfIU
+#http://www.bitbosh.com/2016/05/continuous-integration-setup-nodejs.html
+#http://jipiboily.com/2014/from-zero-to-fully-working-ci-server-in-less-than-10-minutes-with-drone-docker/
+
+
+#https://www.mkyong.com/spring-boot/spring-boot-spring-data-jpa-oracle-example/
+#http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/apaas/rest_spring_jpa/rest_spring_jpa.html
+#http://source.lishman.com/project/689#card/5507/file/19222
