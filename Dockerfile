@@ -3,19 +3,19 @@
 FROM node:7
 
 # Create a new folder for our application
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/app/api-shift-management-setup
 
 # Set the working dir when our container executes
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/api-shift-management-setup
 
 # Copy our package.json file
-ADD package.json /usr/src/app
+ADD package.json /usr/src/app/api-shift-management-setup
 
 # Install our packages
 RUN npm install
 
 # Copy the rest of our application
-COPY . /usr/src/app
+COPY . /usr/src/app/api-shift-management-setup
 
 #Expose our application port
 EXPOSE 4200
@@ -46,6 +46,7 @@ CMD ["node", "server.js"]
 #http://jipiboily.com/2014/from-zero-to-fully-working-ci-server-in-less-than-10-minutes-with-drone-docker/
 
 
-#https://www.mkyong.com/spring-boot/spring-boot-spring-data-jpa-oracle-example/
-#http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/apaas/rest_spring_jpa/rest_spring_jpa.html
-#http://source.lishman.com/project/689#card/5507/file/19222
+#https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-centos-7
+#https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-centos-7
+
+#https://www.metachris.com/2017/01/how-to-install-nodejs-7-on-ubuntu-and-centos/
