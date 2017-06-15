@@ -2,10 +2,16 @@ version: '2' # specify docker-compose version
 
 # Define the services/containers to be run
 services:
-  express: #name of the first service
-    build: . # specify the directory of the Dockerfile
+  database: # name of the second service
+    image: mongo:3.4 # specify image to build container from
     ports:
-      - "4200:3000" #specify ports forewarding
+      - "27017:27017" # specify port forewarding
+    volumes:
+      - mongo-datavolume:/data/mongodb/db #path store data
+  express: #name of the first service
+    build: ./api-shift-management-setup # specify the directory of the Dockerfile
+    ports:
+      - "4200:4200" #specify ports forewarding
     depends_on:
       - database
     environment: #specify enviroment variables for the app
@@ -15,13 +21,5 @@ services:
       - API_VERSION = v1
       - API_RESOURCE_ROOT = '/api/v1'
       - API_SERVER_TEST = 'http://localhost:4200'
-    #env_file:
-    #  - web-variables.env --set the environment variable in file
-  database: # name of the second service
-    image: mongo # specify image to build container from
-    ports:
-      - "27017:27017" # specify port forewarding
-    volumes:
-      - mongo-datavolume:/data/mongodb/db #path store data
 volumes:
   mongo-datavolume:
