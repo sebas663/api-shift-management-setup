@@ -8,14 +8,20 @@ services:
       - "27017:27017" # specify port forewarding
     volumes:
       - mongo-datavolume:/data/mongodb/db #path store data
+    networks:
+      mongo_net:
+        ipv4_address: 172.16.0.1
+    command: mongod --bind_ip 127.0.0.1,172.17.0.2
   express: #name of the first service
     build: ./api-shift-management-setup # specify the directory of the Dockerfile
     ports:
       - "4200:4200" #specify ports forewarding
+    networks:
+      mongo_net:
     depends_on:
       - database
     environment: #specify enviroment variables for the app
-      - MONGODBCON = 'mongodb://database:27017/shift-management-setup'
+      - MONGODBCON = 'mongodb://172.17.0.2:27017/shift-management-setup'
       - PORT = 4200
       - NODE_ENV = "dev"
       - API_VERSION = v1
@@ -23,3 +29,11 @@ services:
       - API_SERVER_TEST = 'http://localhost:4200'
 volumes:
   mongo-datavolume:
+#see https://stackoverflow.com/questions/38860308/mongod-bind-ip-using-docker-compose-version-2
+networks:
+  mongo_net:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.17.0.0/24
+        gateway: 172.17.0.25
