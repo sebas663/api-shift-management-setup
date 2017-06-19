@@ -9,7 +9,7 @@ var ProfessionSchema = new Schema({
 });
 // the schema is useless so far
 // we need to create a model using it
-var Profession = mongoose.model('Profession', ProfessionSchema);
+var Profession = mongoose.model('profession_type', ProfessionSchema);
 
 // make this available to our users in our Node applications
 module.exports = Profession;

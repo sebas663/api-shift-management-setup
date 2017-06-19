@@ -2,7 +2,7 @@ var express      = require("express");
 var mongoose     = require('mongoose');
 // set Promise provider to bluebird
 mongoose.Promise = require('bluebird');
-var DocumentType = require('../models/documentType');
+var DocumentType = mongoose.model('document_type');
 var validator    = require('express-route-validator')
 
 // API routes

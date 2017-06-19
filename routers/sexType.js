@@ -2,7 +2,7 @@ var express      = require("express");
 var mongoose     = require('mongoose');
 // set Promise provider to bluebird
 mongoose.Promise = require('bluebird');
-var SexType      = require('../models/sexType');
+var SexType      = mongoose.model('sex_type');
 var validator    = require('express-route-validator')
 
 // API routes
@@ -10,8 +10,10 @@ var router = express.Router();
 
 router.route('/sexTypes')
   .get(function (req, res) {
+       // console.log('SexType.find().exec()');
         var promise = SexType.find().exec();
         promise.then(function(sexTypes) {
+          // console.log('responses:', sexTypes);
            response(res,sexTypes);
         })
         .catch(function(err){

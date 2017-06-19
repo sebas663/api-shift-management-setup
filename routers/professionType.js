@@ -2,7 +2,7 @@ var express      = require("express");
 var mongoose     = require('mongoose');
 // set Promise provider to bluebird
 mongoose.Promise = require('bluebird');
-var Profession   = require('../models/professionType');
+var Profession   = mongoose.model('profession_type');
 var validator    = require('express-route-validator')
 
 // API routes

@@ -10,7 +10,7 @@ var PermissionSchema = new Schema({
 
 // the schema is useless so far
 // we need to create a model using it
-var Permission = mongoose.model('Permission', PermissionSchema);
+var Permission = mongoose.model('permission_type', PermissionSchema);
 
 // make this available to our users in our Node applications
 module.exports = Permission;

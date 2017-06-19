@@ -10,7 +10,7 @@ var RoleSchema = new Schema({
 });
 // the schema is useless so far
 // we need to create a model using it
-var Role = mongoose.model('Role', RoleSchema);
+var Role = mongoose.model('role_type', RoleSchema);
 
 // make this available to our users in our Node applications
 module.exports = Role;
