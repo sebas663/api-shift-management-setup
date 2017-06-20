@@ -1,5 +1,5 @@
 # Format: FROM    repository[:version]
-FROM       ubuntu:latest
+FROM       ubuntu:16.04
 
 # Installation:
 # Import MongoDB public GPG key AND create a MongoDB list file

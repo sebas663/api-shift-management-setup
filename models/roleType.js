@@ -7,7 +7,7 @@ var RoleSchema = new Schema({
         description :     String,
         permissionCodes : [String],
         enable :          { type: Boolean, default: true }
-});
+}, { bufferCommands: false });
 // the schema is useless so far
 // we need to create a model using it
 var Role = mongoose.model('role_type', RoleSchema);
