@@ -44,13 +44,13 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
-app.get('/', function (req, res) {
-    res.send('Hello World!');
+var router      =   express.Router();
+router.get("/",function(req,res){
+    res.json({"message" : "No hay un recurso aqui!!!"});
 });
+app.use('/',router);
 //Add routes
-
 var root = process.env.API_RESOURCE_ROOT;
-console.log(`${root}.`)
 app.use( root, permissionRoute);
 app.use( root, documentTypeRoute);
 app.use( root, professionTypeRoute);
