@@ -10,15 +10,15 @@ var router = express.Router();
 
 router.route('/sexTypes')
   .get(function (req, res) {
-       // console.log('SexType.find().exec()');
+        console.log('SexType.find().exec()');
         var promise = SexType.find().exec();
         promise.then(function(sexTypes) {
-          // console.log('responses:', sexTypes);
+           console.log('responses:', sexTypes);
            response(res,sexTypes);
         })
         .catch(function(err){
             // just need one of these
-            //console.log('error:', err);
+            console.log('error:', err);
             res.status(500).send(err.message);
         });
     })
@@ -33,18 +33,20 @@ router.route('/sexTypes')
         }),
         function(req, res) {
             //console.log('POST');
-            //console.log(req.body);
+            // console.log(req.body);
             var sexType = new SexType({
                   code: req.body.code,
                   description: req.body.description
             });
+            console.log('sexType.save()');
             var promise = sexType.save();
             promise.then(function(sexType) {
+              console.log(sexType);
               response(res,sexType);
             })
             .catch(function(err){
               // just need one of these
-              //console.log('error:', err);
+              console.log('error:', err);
               res.status(500).send(err.message);
             });
         }
@@ -59,12 +61,12 @@ router.route('/sexType/:idSexType')
       function(req, res) {
           var promise = SexType.findById(req.params.idSexType).exec();
           promise.then(function(sexType) {
-            //console.log('GET /sexTypes/' + req.params.idSexType);
+            console.log('GET /sexTypes/' + req.params.idSexType);
              response(res,sexType);
           })
           .catch(function(err){
             // just need one of these
-            //console.log('error:', err);
+            console.log('error:', err);
             res.status(500).send(err.message);
           });
        }
