@@ -1,5 +1,5 @@
 //For work whit environment variable.
-require('dotenv').config();
+//require('dotenv').config();
 
 var express     =   require("express");
 var compression =   require('compression')
@@ -13,7 +13,7 @@ var documentTypeRoute    =   require('./routers/documentType');
 var professionTypeRoute  =   require('./routers/professionType');
 var sexTypeRoute         =   require('./routers/sexType');
 var roleRoute            =   require('./routers/roleType');
-
+console.log(`proc ${process}.`)
 const port = process.env.PORT || 3000;
 
 // Middlewares
@@ -46,7 +46,9 @@ app.get('/', function (req, res) {
     res.send('Hello World!');
 });
 //Add routes
+
 var root = process.env.API_RESOURCE_ROOT;
+console.log(`${root}.`)
 app.use( root, permissionRoute);
 app.use( root, documentTypeRoute);
 app.use( root, professionTypeRoute);
