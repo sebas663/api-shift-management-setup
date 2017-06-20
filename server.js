@@ -14,6 +14,8 @@ var professionTypeRoute  =   require('./routers/professionType');
 var sexTypeRoute         =   require('./routers/sexType');
 var roleRoute            =   require('./routers/roleType');
 console.log(`proc ${process}.`)
+console.log(`proc ${process.env}.`)
+console.log(`proc ${process.env.PORT}.`)
 const port = process.env.PORT || 3000;
 
 // Middlewares
