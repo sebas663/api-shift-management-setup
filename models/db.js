@@ -3,9 +3,20 @@ var mongoose = require( 'mongoose' );
 
 //db options
 var options = { 
-                server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 }, auto_reconnect: true  }
-                //replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } 
-              };
+  server: { 
+    socketOptions: { 
+      keepAlive: 300000, 
+      autoReconnect: true,
+      connectTimeoutMS: 30000 
+    } 
+  }, 
+ // replset: { 
+ //   socketOptions: { 
+ //     keepAlive: 300000, 
+ //     connectTimeoutMS : 30000 
+ //   } 
+  //} 
+};
 // Build the connection string 
 var dbURI = process.env.MONGODBCON;
 

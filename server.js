@@ -42,7 +42,9 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
-
+app.get('/', function (req, res) {
+    res.send('Hello World!\nI');
+});
 //Add routes
 var root = process.env.API_RESOURCE_ROOT;
 app.use( root, permissionRoute);
