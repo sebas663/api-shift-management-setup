@@ -13,9 +13,7 @@ var documentTypeRoute    =   require('./routers/documentType');
 var professionTypeRoute  =   require('./routers/professionType');
 var sexTypeRoute         =   require('./routers/sexType');
 var roleRoute            =   require('./routers/roleType');
-console.log(`proc ${process}.`)
-console.log(`proc ${process.env}.`)
-console.log(`proc ${process.env.PORT}.`)
+
 const port = process.env.PORT || 3000;
 
 // Middlewares
@@ -56,6 +54,12 @@ app.use( root, documentTypeRoute);
 app.use( root, professionTypeRoute);
 app.use( root, sexTypeRoute);
 app.use( root, roleRoute);
+
+sexTypeRoute.stack.forEach(function(r){
+  if (r.route && r.route.path){
+    console.log(root + r.route.path)
+  }
+})
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port} ${root}.`)
