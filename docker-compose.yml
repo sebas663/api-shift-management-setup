@@ -23,12 +23,12 @@ services:
     depends_on:
       - database
     environment: #specify enviroment variables for the app
-      - MONGODBCON='mongodb://172.19.0.2:27017/shift-management-setup'      
+      - MONGODBCON=mongodb://database:27017/shift-management-setup    
       - PORT=4200
-      - NODE_ENV="dev"
+      - NODE_ENV=dev
       - API_VERSION=v1
-      - API_RESOURCE_ROOT='/api/v1'
-      - API_SERVER_TEST='http://localhost:4200'
+      - API_RESOURCE_ROOT=/api/v1
+      - API_SERVER_TEST=http://localhost:4200
 volumes:
   mongo-datavolume:
 #see https://stackoverflow.com/questions/38860308/mongod-bind-ip-using-docker-compose-version-2
