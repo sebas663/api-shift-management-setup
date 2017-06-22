@@ -17,7 +17,7 @@ var resource = process.env.API_RESOURCE_ROOT + '/professions';
 var resourceBar = resource + '/';
 
 describe('Professions', () => {
-    beforeEach(() => {
+    beforeEach((done) => {
         Profession.remove({}, (err) => { 
            done();         
         });

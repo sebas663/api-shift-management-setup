@@ -17,7 +17,7 @@ var resource = process.env.API_RESOURCE_ROOT + '/sexTypes';
 var resourceBar = resource + '/';
 
 describe('SexTypes', () => {
-    beforeEach(() => {
+    beforeEach((done) => {
         SexType.remove({}, (err) => { 
            done();         
         });

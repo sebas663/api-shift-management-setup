@@ -17,7 +17,7 @@ var resource = process.env.API_RESOURCE_ROOT + '/permissions';
 var resourceBar = resource + '/';
 
 describe('Permissions', () => {
-    beforeEach(() => {
+    beforeEach((done) => {
         Permission.remove({}, (err) => { 
            done();         
         });

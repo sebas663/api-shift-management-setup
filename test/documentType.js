@@ -3,6 +3,7 @@ var mongoose     =   require('mongoose');
 mongoose.Promise =   require('bluebird');
 //model for test
 var DocumentType =   require('../models/documentType');
+//var DocumentType =   mongoose.model('document_type');
 //Require the dev-dependencies
 var chai         =   require('chai');
 var chaiHttp     =   require('chai-http');
@@ -13,30 +14,30 @@ var server       =  process.env.API_SERVER_TEST;
 //For send request to server
 chai.use(chaiHttp);
 
-var resource = process.env.API_RESOURCE_ROOT + '/sexTypes';
+var resource = process.env.API_RESOURCE_ROOT + '/documentTypes';
 var resourceBar = resource + '/';
 
 describe('DocumentTypes', () => {
-    beforeEach(() => {
+    beforeEach((done) => {
         DocumentType.remove({}, (err) => { 
-           done();         
+            done();         
         });
     });
-  describe('/GET documentTypes', () => {
-      it('it should GET all the documentTypes ' + server, () => {
-             chai.request(server)
-            .get('/api/' + process.env.API_VERSION + '/documentTypes')
-            .then(function (res) {
-                expect(res).to.have.status(200);
-                expect(res.body).to.be.a('array');
-                expect(res.body.length).to.be.eql(0);
-            })
-            .catch(function (err) {
-                console.log("Promise Rejected");
-            });
-      });
-  });
-  /*
+    describe('/GET documentTypes', () => {
+        it('it should GET all the documentTypes ' + server, () => {
+                chai.request(server)
+                .get(resource)
+                .then(function (res) {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.a('array');
+                    expect(res.body.length).to.be.eql(0);
+                })
+                .catch(function (err) {
+                    console.log("Promise Rejected");
+                });
+        });
+    });
+  
   describe('/POST documentType', () => {
       it('when missing item in payload, should return a 400 ok response and a single error', () => {
         var documentType = {
@@ -145,5 +146,5 @@ describe('DocumentTypes', () => {
                 });
           });
       });
-  });*/
+  });
 });

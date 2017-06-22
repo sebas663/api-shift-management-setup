@@ -17,7 +17,7 @@ var resource = process.env.API_RESOURCE_ROOT + '/roles';
 var resourceBar = resource + '/';
 
 describe('Roles', () => {
-    beforeEach(() => {
+    beforeEach((done) => {
         Role.remove({}, (err) => { 
            done();         
         });
