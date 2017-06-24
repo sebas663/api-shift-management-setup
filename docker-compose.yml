@@ -27,7 +27,7 @@ services:
   express: #name of the first service
     build: . # specify the directory of the Dockerfile
     ports:
-      - "4200:4200" #specify ports forewarding
+      - "4200" #specify ports forewarding
     # networks:
     #   mongo_net:
     links:
@@ -44,7 +44,7 @@ services:
   express1: #name of the second service
     build: . # specify the directory of the Dockerfile
     ports:
-      - "4200:4200" #specify ports forewarding
+      - "4200" #specify ports forewarding
     # networks:
     #   mongo_net:
     links:
@@ -61,7 +61,7 @@ services:
   express2: #name of the third service
     build: . # specify the directory of the Dockerfile
     ports:
-      - "4200:4200" #specify ports forewarding
+      - "4200" #specify ports forewarding
     # networks:
     #   mongo_net:
     links:
