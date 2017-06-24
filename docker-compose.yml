@@ -9,15 +9,15 @@ services:
       - "27017:27017" # specify port forewarding
     volumes:
       - mongo-datavolume:/data/mongodb/db #path store data
-    networks:
-      mongo_net:
-        ipv4_address: 172.19.0.2
+    # networks:
+    #   mongo_net:
+    #     ipv4_address: 172.19.0.2
   express: #name of the first service
     build: . # specify the directory of the Dockerfile
     ports:
       - "4200:4200" #specify ports forewarding
-    networks:
-      mongo_net:
+    # networks:
+    #   mongo_net:
     links:
       - database
     depends_on:
@@ -32,10 +32,10 @@ services:
 volumes:
   mongo-datavolume:
 #see https://stackoverflow.com/questions/38860308/mongod-bind-ip-using-docker-compose-version-2
-networks:
-  mongo_net:
-    driver: bridge
-    ipam:
-      config:
-      - subnet: 172.19.0.0/24
-        gateway: 172.19.0.1
+# networks:
+#   mongo_net:
+#     driver: bridge
+#     ipam:
+#       config:
+#       - subnet: 172.19.0.0/24
+#         gateway: 172.19.0.1
