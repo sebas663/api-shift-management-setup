@@ -3,6 +3,7 @@ version: '2' # specify docker-compose version
 # Define the services/containers to be run
 services:
   nginx:
+    restart: always
     build: ./nginx
     links:
       - express:express
