@@ -1,4 +1,8 @@
 # Dockerfile
+
+#Install PM2
+RUN npm install pm2 -g
+
 # The FROM directive sets the Base Image for subsequent instructions
 FROM node:7
 
@@ -21,7 +25,13 @@ COPY . /usr/src/app
 EXPOSE 4200
 
 # Set start command
-CMD ["node", "server.js"]
+#CMD ["node", "server.js"]
+#change CMD for use PM2
+#CMD ["pm2-docker", "process.yml"]
+
+#To split each processes in his own Docker, you can use the –only [app-name] option:
+CMD ["pm2-docker", "process.yml", "--only", "api-shift-management-setup"]
+
 
 # Creathe the image.
 # docker build -t api-shift-management-setup .

@@ -65,3 +65,9 @@ app.use( root, roleRoute);
 app.listen(port, () => {
     console.log(`Server is running on port ${port} ${root}.`)
 })
+
+process.on('SIGINT', function() {
+   db.stop(function(err) {
+     process.exit(err ? 1 : 0);
+   });
+});
