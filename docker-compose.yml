@@ -3,7 +3,8 @@ version: '2' # specify docker-compose version
 # Define the services/containers to be run
 services:
   database: # name of the second service
-    build: ./api-shift-management-setup/mongo # specify the directory of the Dockerfile
+    #build: ./mongo # specify the directory of the Dockerfile
+    image: mongo
     ports:
       - "27017:27017" # specify port forewarding
     volumes:
@@ -11,9 +12,8 @@ services:
     networks:
       mongo_net:
         ipv4_address: 172.19.0.2
-    # command: mongod --bind_ip 172.19.0.2
   express: #name of the first service
-    build: ./api-shift-management-setup # specify the directory of the Dockerfile
+    build: . # specify the directory of the Dockerfile
     ports:
       - "4200:4200" #specify ports forewarding
     networks:
