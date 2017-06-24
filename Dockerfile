@@ -3,6 +3,10 @@
 # The FROM directive sets the Base Image for subsequent instructions
 FROM node:7
 
+
+#Install PM2
+RUN npm install pm2 -g
+
 # Create a new folder for our application
 RUN mkdir -p /usr/src/app
 
@@ -11,9 +15,6 @@ WORKDIR /usr/src/app
 
 # Copy our package.json file
 ADD package.json /usr/src/app
-
-#Install PM2
-RUN npm install pm2 -g
 
 # Install our packages
 RUN npm install

@@ -2,5 +2,5 @@ apps:
   - script   : 'server.js'
     name     : 'api-shift-management-setup'
     exec_mode: 'cluster'
-    instances: 2
+    instances: 3
   # - script   : 'worker.js'
