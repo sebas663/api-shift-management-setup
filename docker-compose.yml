@@ -6,8 +6,6 @@ services:
     build: ./nginx
     links:
       - express:express
-      - express1:express1
-      - express2:express2
     ports:
       - "80:80"    
     volumes:
@@ -25,40 +23,6 @@ services:
     #   mongo_net:
     #     ipv4_address: 172.19.0.2
   express: #name of the first service
-    build: . # specify the directory of the Dockerfile
-    ports:
-      - "4200" #specify ports forewarding
-    # networks:
-    #   mongo_net:
-    links:
-      - database
-    depends_on:
-      - database
-    environment: #specify enviroment variables for the app
-      - MONGODBCON=mongodb://database:27017/shift-management-setup    
-      - PORT=4200
-      - NODE_ENV=dev
-      - API_VERSION=v1
-      - API_RESOURCE_ROOT=/api/v1
-      - API_SERVER_TEST=http://localhost:4200
-  express1: #name of the second service
-    build: . # specify the directory of the Dockerfile
-    ports:
-      - "4200" #specify ports forewarding
-    # networks:
-    #   mongo_net:
-    links:
-      - database
-    depends_on:
-      - database
-    environment: #specify enviroment variables for the app
-      - MONGODBCON=mongodb://database:27017/shift-management-setup    
-      - PORT=4200
-      - NODE_ENV=dev
-      - API_VERSION=v1
-      - API_RESOURCE_ROOT=/api/v1
-      - API_SERVER_TEST=http://localhost:4200
-  express2: #name of the third service
     build: . # specify the directory of the Dockerfile
     ports:
       - "4200" #specify ports forewarding
