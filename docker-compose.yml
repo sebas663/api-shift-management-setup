@@ -2,22 +2,33 @@ version: '2' # specify docker-compose version
 
 # Define the services/containers to be run
 services:
+  nginx:
+    restart: always
+    build: ./nginx
+    links:
+      - express:express
+    ports:
+      - "80:80"    
+    volumes:
+      - /etc/nginx/psw:/etc/nginx/psw
+    environment:
+      - DOMAIN_NAME=napi-shift-management-setup
   database: # name of the second service
-    build: ./api-shift-management-setup/mongo # specify the directory of the Dockerfile
+    #build: ./mongo # specify the directory of the Dockerfile
+    image: mongo:3.4
     ports:
       - "27017:27017" # specify port forewarding
     volumes:
       - mongo-datavolume:/data/mongodb/db #path store data
-    networks:
-      mongo_net:
-        ipv4_address: 172.19.0.2
-    # command: mongod --bind_ip 172.19.0.2
+    # networks:
+    #   mongo_net:
+    #     ipv4_address: 172.19.0.2
   express: #name of the first service
-    build: ./api-shift-management-setup # specify the directory of the Dockerfile
+    build: . # specify the directory of the Dockerfile
     ports:
-      - "4200:4200" #specify ports forewarding
-    networks:
-      mongo_net:
+      - "4200" #specify ports forewarding
+    # networks:
+    #   mongo_net:
     links:
       - database
     depends_on:
@@ -32,10 +43,10 @@ services:
 volumes:
   mongo-datavolume:
 #see https://stackoverflow.com/questions/38860308/mongod-bind-ip-using-docker-compose-version-2
-networks:
-  mongo_net:
-    driver: bridge
-    ipam:
-      config:
-      - subnet: 172.19.0.0/24
-        gateway: 172.19.0.1
+# networks:
+#   mongo_net:
+#     driver: bridge
+#     ipam:
+#       config:
+#       - subnet: 172.19.0.0/24
+#         gateway: 172.19.0.1
