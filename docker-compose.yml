@@ -16,8 +16,9 @@ services:
   database: # name of the second service
     #build: ./mongo # specify the directory of the Dockerfile
     image: mongo:3.4
+    command: mongod --port 27018
     ports:
-      - "27017:27017" # specify port forewarding
+      - "27018:27018" # specify port forewarding
     volumes:
       - mongo-datavolume:/data/mongodb/db #path store data
     # networks:
