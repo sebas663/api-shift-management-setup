@@ -23,7 +23,7 @@ RUN npm install
 COPY . /usr/src/app
 
 #Expose our application port
-EXPOSE 4200
+EXPOSE 3000
 
 #To split each processes in his own Docker, you can use the –only [app-name] option:
 CMD ["pm2-docker", "process.yml", "--only", "api-shift-management-setup"]
