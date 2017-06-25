@@ -27,7 +27,7 @@ services:
   express: #name of the first service
     build: . # specify the directory of the Dockerfile
     ports:
-      - "4200" #specify ports forewarding
+      - "3000" #specify ports forewarding
     # networks:
     #   mongo_net:
     links:
@@ -35,8 +35,8 @@ services:
     depends_on:
       - database
     environment: #specify enviroment variables for the app
-      - MONGODBCON=mongodb://database:27017/shift-management-setup    
-      - PORT=4200
+      - MONGODBCON=mongodb://database:27018/shift-management-setup    
+      - PORT=3000
       - NODE_ENV=dev
       - API_VERSION=v1
       - API_RESOURCE_ROOT=/api/v1
