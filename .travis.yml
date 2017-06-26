@@ -11,4 +11,21 @@ branches:
 branches:
   only:
   - master
-# more options
+
+# enable use docker
+# services:
+#   - docker
+# env:
+#   global:
+#   - DOCKER_IMAGE_NAME=sebas663/api-shift-management-setup
+#   - COMMIT=${TRAVIS_COMMIT::8}
+
+# after_success: 
+#   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
+#   - docker build -f Dockerfile -t $DOCKER_IMAGE_NAME .
+#   - if [ ! -z "$TRAVIS_TAG" ]; then
+#       docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$TRAVIS_TAG;
+#     fi
+#   - if [ "$TRAVIS_BRANCH" == "master" ]; then
+#       docker push $DOCKER_IMAGE_NAME;
+#     fi
