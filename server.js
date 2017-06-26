@@ -44,7 +44,7 @@ app.use(function (req, res, next) {
 });
 var router      =   express.Router();
 router.get("/",function(req,res){
-    res.json({"message" : "No hay un recurso aqui probando el git!!!"});
+    res.json({"message" : "No hay un recurso aqui probando la integracion continua!!!"});
 });
 app.use('/',router);
 //Add routes
