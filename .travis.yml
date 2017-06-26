@@ -11,4 +11,24 @@ branches:
 branches:
   only:
   - master
-# more options
+  
+# enable use docker
+services:
+  - docker
+env:
+  global:
+  - DOCKER_IMAGE_NAME=sebas663/api-shift-management-setup
+  - COMMIT=${TRAVIS_COMMIT::8}
+  - secure: nXt/1QsFK2RfQF9DAV+M/NkYVY0zeJ3zY+qXrvqc12gNp2QIGP3a0U91nmO1dvyI35pdbwPWvuqhtZu8PBU1cllmaWtNLNCBOv6BxKoEciLF6nB8OQmEM6FrWuqu/eGOdhJ+KmZ0zgOnegJTQTqnIxlKAUDmL155KN9DtaTJ6JCJRGqWWX6LENwYlhjuizRFtEAs7LnuwG+u92KeZu9uIPoWSfbgb6xxfDBEEYgzjffgqgqdG1LFHf8EayXKiZh5XXwuINZ/W3rQz+Zil3BoELFy4kjhOii209buV2RLtAxdBf3fTuhhSEuYwEBswIatQD1zrCNhTzlpzBlJwl+5bgp59AHj2nlh8LM4nrF+KvQnBxjuVbcwAHiecK5wemhHUJ6V8R6yjHeiKxULvHAsf61IujS6kexhmvSo8KmFgh+zK7KnIJ9h14dSrtbArvrYUBmJ5X90b7ZB43fuGaoy94T3JDePnhqoeSQHbuDBYr9L6odaJG/7CShUNefC9+A0xPCGKS59KjukbZMrot8qu9YUMDCaWZ1z6+JD3fOP2WEvmznTzf7658A1tsGyR4ETSbJ1jRdx4pftEucZps1nGaq6tVE1OXYRESnB2F+V6k0+6BH2ACSmyU7WGIccmlYWBAF/YeFQlJwjnpvNHOU+5AmbDpWHUh9VWs2rZEx6xtw=
+  - secure: Z2c49edRB/xjglrw13a7ovrZ7mI/Wc3Hzc8Am35BiL+MyhQGIPBq7w7vngPfu6eQ8eTex3d7EwsLi+67PKwrJ64QHipYniQ0GCluG64smEtW7u7xnBFVPo/KVkryA1NAWhQ8zAYIVUM7zkdgA22bylG9nCM18TPx5bozEpEpb68lz7lNEGx68e77R7uYGiXqHGsLpOO+2J4qE5PAXlEBUC/EJpw1OTCuVW7Ytq2xX5/99U27MQYVYhJBElkH+MVt6kNPJsNXhRChez5cwz/B40FnhYt5CH/cqa/YPcOIFAW8htM/BDlI13QgEEMFvr2OlHG70ubue5Xuzs6svKdREL5d/34cFSsWMOH51ziOncp/webvxUuYznBnT6F7ICroYODUGW6DiMZ+IKPoU7c2hChx3VgJzdoolj7k87d8152CjxOApftYq3JUvWAClN3cl6fMgqMZLEzEZa+IZjuVA/RC8ST13wwiOM/h7hUDpvJCrb6TRVqdostdxFZBUXiUlEPE36LvJE567QjxN7aaL1oDKm54gQA9sMJyOVr5LPt8qGGWrXMCF7exc9+hFEqyj+Yjk9g7/N/Tkt0OzbAft7GHh7XBtN978ZafQ7vwoMbWsyXkweFSveTPRVuxyEWwczkmI05U9OcVQ2ZJ42bOobpZ1iuiNg+96T78XaNe8RQ=
+  - secure: rq/0cx8eyfUpLqMYMZlbt6EgQwA834DFnOzlisuc1TYC9dxocKHhUGUN0er5kE15M9Z03WQJ5ddRaUr+K0YKezstYsPbEmgjZECb0T+GVZGC6tggny/cn41weQvUUseR5cEw6qu1wQI8y/61No/sZuiBWDpwjTWAW9Z6WUuTATDcRHnGE9+FgD0qpFtHnidvJsLhou1PIWyFBvo/4YBA0WlSod9iWYmpGaQLmMQdTWJGzybScpB+w8Zxljp8WHZqTNteVv57e/uffNcASKN1yk8h4M2skhFGHOqdPyPn/4hryAcJoYHXctsAEogyl+1a3MbYJ9nPLbPf9kjx2YSt9PWhgiPYzIRplF33RwJ5tqLvwpySUBLfGeAdudRqgkVU2TVrRpD06xz4GCCBbIQvhywMDTfN8e3zg3831+I8fUegK00ayx7pQlchiGxf1DySyAXfh5iUcsC4yDmErRokUEofCJ83u2pF514GZqaoOPe+tT4/3WnCQBV/SnZdRRmKqJyEknIUU5LmdOSDmDi3AKSAfb+eMS6HLUkspfNHRyB/IkMix7Gnypy/ltAelXrBl2wQNdIAfdV/nDf/gJZd4jP+FRX+rk3Rw14CWOlSV2zItlwqrSV9Dk1vrKZFqPZR8xmCvrSSF3Lwr5jfJTadm05jITrCYVy4hHOJj/z3X48=
+
+after_success: 
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
+  - docker build -f Dockerfile -t $DOCKER_IMAGE_NAME .
+  - if [ ! -z "$TRAVIS_TAG" ]; then
+      docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$TRAVIS_TAG;
+    fi
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      docker push $DOCKER_IMAGE_NAME;
+    fi
